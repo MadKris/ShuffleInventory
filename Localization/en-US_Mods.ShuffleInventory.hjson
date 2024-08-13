@@ -1,6 +1,6 @@
 Configs: {
 	ShuffleInventoryServerConfig: {
-		DisplayName: Shuffle Inventory Server Config
+		DisplayName: Server Configuration
 		GeneralHeader: General settings
 
 		EnableTimedShuffle: {
@@ -46,6 +46,10 @@ Configs: {
 		}
 
 		UIHeader: Display Timer Header
+	}
+
+	ShuffleInventoryClientConfig: {
+		DisplayName: Client Configuration
 
 		DisplayTimer: {
 			Label: Display time before shuffling

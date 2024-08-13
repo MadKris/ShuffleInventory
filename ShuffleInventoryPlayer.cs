@@ -10,14 +10,17 @@ namespace ShuffleInventory;
 public class ShuffleInventoryPlayer : ModPlayer
 {
     private static ShuffleInventoryServerConfig ServerConfig => ModContent.GetInstance<ShuffleInventoryServerConfig>();
+
+    public TimeSpan TimeElapsed => DateTime.UtcNow - LastShuffleTime;
     
-    private DateTime _lastShuffleTime = DateTime.UtcNow;
+    public TimeSpan TimeLeft => TimeSpan.FromMilliseconds(ServerConfig.TimeLimit - TimeElapsed.TotalMilliseconds);
+    
+    public DateTime LastShuffleTime { get; private set; } = DateTime.UtcNow;
     public override void PostUpdate()
     {
-        var time = (DateTime.UtcNow - _lastShuffleTime).TotalMilliseconds;
-        if (!ServerConfig.EnableTimedShuffle || time < ServerConfig.TimeLimit) return;
+        if (!ServerConfig.EnableTimedShuffle || TimeElapsed.TotalMilliseconds < ServerConfig.TimeLimit) return;
         ShuffleWholeInventory();
-        _lastShuffleTime = DateTime.UtcNow;
+        LastShuffleTime = DateTime.UtcNow;
     }
 
     public virtual void ShuffleWholeInventory()

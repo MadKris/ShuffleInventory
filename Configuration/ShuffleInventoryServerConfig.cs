@@ -18,8 +18,4 @@ internal class ShuffleInventoryServerConfig : ModConfig
     [DefaultValue(true)] public bool ShuffleAmmo;
     [DefaultValue(true)] public bool ShuffleCoins;
     [DefaultValue(true)] public bool ShuffleDyes;
-
-    [Header("$Mods.ShuffleInventory.Configs.ShuffleInventoryServerConfig.UIHeader")]
-    [DefaultValue(true)]
-    public bool DisplayTimer;
 }
