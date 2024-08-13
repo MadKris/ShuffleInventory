@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using ShuffleInventory.Configuration;
 using Terraria.ModLoader;
 using ShuffleInventory.Utility;
 using Terraria;
@@ -8,40 +9,51 @@ namespace ShuffleInventory;
 
 public class ShuffleInventoryPlayer : ModPlayer
 {
-    private const double TimeLimit = 2000;
+    private static ShuffleInventoryServerConfig ServerConfig => ModContent.GetInstance<ShuffleInventoryServerConfig>();
+    
     private DateTime _lastShuffleTime = DateTime.UtcNow;
     public override void PostUpdate()
     {
         var time = (DateTime.UtcNow - _lastShuffleTime).TotalMilliseconds;
-        if (time < TimeLimit) return;
-        ShuffleAccessories();
-        ShuffleInventory();
+        if (!ServerConfig.EnableTimedShuffle || time < ServerConfig.TimeLimit) return;
+        ShuffleWholeInventory();
         _lastShuffleTime = DateTime.UtcNow;
     }
 
-    private void ShuffleAccessories()
+    public virtual void ShuffleWholeInventory()
     {
+        ShuffleAccessories();
+        ShuffleInventory(); 
+        ShuffleDyes();
+    }
+
+    public void ShuffleDyes()
+    {
+        if (!ServerConfig.ShuffleDyes) return;
+        this.Player.dye.Shuffle();
+    }
+
+    public void ShuffleAccessories()
+    {
+        if (!ServerConfig.ShuffleAccessories) return;
         const int vanityOffset = 10;
         const int accessoryFirst = 3;
-        const int vanityFirst = vanityOffset + accessoryFirst;
-        
         var accessoryCount = Player.InitialAccSlotCount + Player.GetAmountOfExtraAccessorySlotsToShow();
         
         var accessoryLast = accessoryFirst + accessoryCount;
-        var vanityLast = vanityFirst + accessoryCount;
-        
         var shuffledAccessories = this.Player.armor[accessoryFirst..accessoryLast];
-        var shuffledVanity = this.Player.armor[vanityFirst..vanityLast];
-        
         shuffledAccessories.Shuffle();
+        
+        const int vanityFirst = vanityOffset + accessoryFirst;
+        var vanityLast = vanityFirst + accessoryCount;
+        var shuffledVanity = this.Player.armor[vanityFirst..vanityLast];
         shuffledVanity.Shuffle();
+        
         this.Player.armor.UpdateAllAt(shuffledAccessories, accessoryFirst);
         this.Player.armor.UpdateAllAt(shuffledVanity, accessoryFirst + vanityOffset);
-        this.Player.dye.Shuffle();
-        
     }
 
-    private void ShuffleInventory()
+    public void ShuffleInventory()
     {
         const int hotbarSize = 10;
         const int hotbarFirst = Main.InventoryItemSlotsStart;
@@ -62,10 +74,22 @@ public class ShuffleInventoryPlayer : ModPlayer
         shuffledInventory.Shuffle();
         shuffledAmmo.Shuffle();
         shuffledCoins.Shuffle();
-        
-        this.Player.inventory.UpdateAllAt(shuffledHotbar, hotbarFirst);
-        this.Player.inventory.UpdateAllAt(shuffledInventory, hotbarLast);
-        this.Player.inventory.UpdateAllAt(shuffledAmmo, ammoFirst);
-        this.Player.inventory.UpdateAllAt(shuffledCoins, coinsFirst);
+
+        if (ServerConfig.ShuffleHotbar)
+        {
+            this.Player.inventory.UpdateAllAt(shuffledHotbar, hotbarFirst);
+        }
+        if (ServerConfig.ShuffleInventory)
+        {
+            this.Player.inventory.UpdateAllAt(shuffledInventory, hotbarLast);
+        }
+        if (ServerConfig.ShuffleAmmo)
+        {
+            this.Player.inventory.UpdateAllAt(shuffledAmmo, ammoFirst);
+        }
+        if (ServerConfig.ShuffleCoins)
+        {
+            this.Player.inventory.UpdateAllAt(shuffledCoins, coinsFirst);
+        }
     }
 }

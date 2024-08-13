@@ -1,2 +1,55 @@
-# This file will automatically update with entries for new content after a build and reload.
+Configs: {
+	ShuffleInventoryServerConfig: {
+		DisplayName: Shuffle Inventory Server Config
+		GeneralHeader: General settings
 
+		EnableTimedShuffle: {
+			Label: Enable Timed Shuffle
+			Tooltip: With this option enabled the inventory will be shuffled periodically after set amount of time. If this is disabled only other mods can trigger shuffling
+		}
+
+		TimeLimit: {
+			Label: Shuffle Period
+			Tooltip: If the "Enable Timed Shuffle" option is enabled this option affects how much time should pass between each shuffle in milliseconds
+		}
+
+		ShuffleVariantsHeader: Shuffle options
+
+		ShuffleAccessories: {
+			Label: Shuffle Accessories
+			Tooltip: Should the mod shuffle items in accessory slots?
+		}
+
+		ShuffleHotbar: {
+			Label: Shuffle Hotbar
+			Tooltip: Should the mod shuffle items in hotbar?
+		}
+
+		ShuffleInventory: {
+			Label: Shuffle Inventory (except hotbar)
+			Tooltip: Should the mod shuffle items in inventory slots (except hotbar items)?
+		}
+
+		ShuffleAmmo: {
+			Label: Shuffle Ammo
+			Tooltip: Should the mod shuffle items in ammo slots?
+		}
+
+		ShuffleCoins: {
+			Label: Shuffle Coins
+			Tooltip: Should the mod shuffle items in coin slots?
+		}
+
+		ShuffleDyes: {
+			Label: Shuffle Dyes
+			Tooltip: Should the mod shuffle items in dye slots (only shuffling armor and accessories dyes)?
+		}
+
+		UIHeader: Display Timer Header
+
+		DisplayTimer: {
+			Label: Display time before shuffling
+			Tooltip: If both timed shuffle and this option are enabled the time before next inventory shuffle will be displayed
+		}
+	}
+}
