@@ -22,7 +22,9 @@ public class ShuffleInventoryPlayer : ModPlayer
         ShuffleWholeInventory();
         LastShuffleTime = DateTime.UtcNow;
     }
-
+    public void ResetTimer() {
+        LastShuffleTime = DateTime.Now;
+    }
     public virtual void ShuffleWholeInventory()
     {
         ShuffleAccessories();

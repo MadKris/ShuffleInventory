@@ -40,6 +40,11 @@ public class ShuffleTimerSystem : ModSystem
         }
     }
 
+    public override void OnWorldLoad()
+    {
+        base.OnWorldLoad();
+        Main.player[Main.myPlayer].GetModPlayer<ShuffleInventoryPlayer>().ResetTimer();
+    }
     public override void UpdateUI(GameTime gameTime)
     {
         _timer?.Update(gameTime);
