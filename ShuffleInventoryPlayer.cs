@@ -16,14 +16,12 @@ public class ShuffleInventoryPlayer : ModPlayer
     public TimeSpan TimeLeft => TimeSpan.FromMilliseconds(ServerConfig.TimeLimit - TimeElapsed.TotalMilliseconds);
     
     public DateTime LastShuffleTime { get; private set; } = DateTime.UtcNow;
+
     public override void PostUpdate()
     {
         if (!ServerConfig.EnableTimedShuffle || TimeElapsed.TotalMilliseconds < ServerConfig.TimeLimit) return;
         ShuffleWholeInventory();
         LastShuffleTime = DateTime.UtcNow;
-    }
-    public void ResetTimer() {
-        LastShuffleTime = DateTime.Now;
     }
     public virtual void ShuffleWholeInventory()
     {

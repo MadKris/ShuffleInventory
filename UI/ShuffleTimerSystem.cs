@@ -22,7 +22,6 @@ public class ShuffleTimerSystem : ModSystem
         TimerState = new ShuffleTimerState();
         TimerState.Activate();
         _timer = new UserInterface();
-        
     }
 
     public override void PostUpdateEverything()
@@ -40,11 +39,7 @@ public class ShuffleTimerSystem : ModSystem
         }
     }
 
-    public override void OnWorldLoad()
-    {
-        base.OnWorldLoad();
-        Main.player[Main.myPlayer].GetModPlayer<ShuffleInventoryPlayer>().ResetTimer();
-    }
+    
     public override void UpdateUI(GameTime gameTime)
     {
         _timer?.Update(gameTime);
@@ -52,11 +47,11 @@ public class ShuffleTimerSystem : ModSystem
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
-        int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+        int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
         if (mouseTextIndex != -1)
         {
             layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
-                "Inventory Shuffle Timer Layer",
+                "Shuffle Inventory: Timer layer",
                 delegate
                 {
                     _timer?.Draw(Main.spriteBatch, new GameTime());

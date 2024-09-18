@@ -11,4 +11,11 @@ public class ShuffleInventoryClientConfig : ModConfig
     [DefaultValue(true)]
     public bool DisplayTimer;
 
+    [DefaultValue(0)]
+    [Range(0, 120)]
+    public int DisplayTimerOffsetX;
+    [DefaultValue(0)]
+    [Range(0, 120)]
+    public int DisplayTimerOffsetY;
+
 }

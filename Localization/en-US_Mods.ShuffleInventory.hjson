@@ -55,5 +55,15 @@ Configs: {
 			Label: Display time before shuffling
 			Tooltip: If both timed shuffle and this option are enabled the time before next inventory shuffle will be displayed
 		}
+
+		DisplayTimerOffsetX: {
+			Label: Display Timer Offset X
+			Tooltip: ""
+		}
+
+		DisplayTimerOffsetY: {
+			Label: Display Timer Offset Y
+			Tooltip: ""
+		}
 	}
 }
