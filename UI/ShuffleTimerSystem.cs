@@ -26,7 +26,7 @@ public class ShuffleTimerSystem : ModSystem
 
     public override void PostUpdateEverything()
     {
-        if (ServerConfig.EnableTimedShuffle && ClientConfig.DisplayTimer && !Main.playerInventory)
+        if (ServerConfig.EnableTimedShuffle && ClientConfig.DisplayTimer && !Main.playerInventory && !Main.player[Main.myPlayer].dead)
         {
             if (_timer.CurrentState == null)
             {
