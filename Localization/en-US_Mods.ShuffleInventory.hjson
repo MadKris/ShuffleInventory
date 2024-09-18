@@ -44,8 +44,6 @@ Configs: {
 			Label: Shuffle Dyes
 			Tooltip: Should the mod shuffle items in dye slots (only shuffling armor and accessories dyes)?
 		}
-
-		UIHeader: Display Timer Header
 	}
 
 	ShuffleInventoryClientConfig: {
@@ -65,5 +63,7 @@ Configs: {
 			Label: Display Timer Offset Y
 			Tooltip: ""
 		}
+
+		UIHeader: UI Settings
 	}
 }

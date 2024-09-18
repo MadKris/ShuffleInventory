@@ -7,7 +7,7 @@ public class ShuffleInventoryClientConfig : ModConfig
 {
     public override ConfigScope Mode => ConfigScope.ClientSide;
     
-    [Header("$Mods.ShuffleInventory.Configs.ShuffleInventoryServerConfig.UIHeader")] 
+    [Header("$Mods.ShuffleInventory.Configs.ShuffleInventoryClientConfig.UIHeader")] 
     [DefaultValue(true)]
     public bool DisplayTimer;
 
