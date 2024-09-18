@@ -20,13 +20,11 @@ public class ShuffleTimerState : UIState
 
     private const string ShuffleText = "Inventory shuffle in: ";
     public UIText timerText;
-    private float defaultTextWidth;
 
     public override void OnInitialize()
     {
         
         timerText = new UIText(ShuffleText);
-        defaultTextWidth = timerText.GetOuterDimensions().Width;
         Top.Pixels = Main.screenHeight - 4 * Main.inventoryScale - timerText.GetOuterDimensions().Height;
         Append(timerText);
     }
